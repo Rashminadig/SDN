@@ -15,6 +15,11 @@ class icmp(object):
 
 
     def check_packet(self,mode,src_ip, src_port, dst_ip, dst_port,rule_type,pattern,depth,offset,flags,rule_msg): 
+	global good_pkt    
+	good_pkt = 'True'  
+	#print "In icmp.py" 
+	alertmsg = 'NONE'  
+        
         for p in self.packet_data:
             if hasattr(p, 'protocol_name') is True:
                 #print p.protocol_name
@@ -57,7 +62,13 @@ class icmp(object):
                                  #match_content = BoyerMooreStringSearch.BMSearch(pkt_contents,pattern)
 				  match_content = pkt_contents.find(p)
 				  if match_content == -1:
-                                           break
+				     good_pkt='True' #--sow
+			 	     # Writing good pkt val every time to file
+	                             f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+          	                     f.write("\n")
+                    	             f.write(good_pkt)
+                              	     f.close()
+                                     break
 			 else:
 			      # if pattern is None just set the match_content to True Value(1)	
 			      match_content = 1	
@@ -65,7 +76,15 @@ class icmp(object):
                          #print match_content
                          #if match_content == True:
                          if match_content != -1:
-                                 f = open('/home/ubuntu/RYU295/ryu/lib/ids/log.txt', 'a')
+				 good_pkt = 'False' #--sow
+   				 print "In icmp.py match content!=-1,good_pkt=", good_pkt #--sow
+				 # Writing good pkt val every time to file
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+                                 f.write("\n")
+                                 f.write(good_pkt)
+                                 f.close()
+				 #writing the rule to file
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/log.txt', 'a')
                                  f.write("\n")
 				 f.write(rule_msg)
                                  f.close()
@@ -73,10 +92,16 @@ class icmp(object):
                                                 self.src_ip, self.dst_ip, self.src_port, self.dst_port)
                                  #print 'After Call to Print Packet Data in TCP'
                          #if mode == 'alert' and match_content == True:
+			 
                          if mode == 'alert' and match_content != -1:
                                  #print 'TCP Attack Packet'
                                  alertmsg = rule_msg
-                                 return alertmsg		
+                                 #return alertmsg #--sow	
+				 good_pkt= 'False' #--sow
+   				 print "In icmp.py mode=alert, match content!=-1, bfr returngood_pkt=", good_pkt #--sow	
+		         	 return good_pkt,alertmsg #--sow
+        
+  	
                                 
     def check_ip_match(self,src_ip, dst_ip,rule_type):
         #print 'packet source', self.src_ip

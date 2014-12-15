@@ -20,6 +20,7 @@
 			<li ><a href="/">Traffic</a></li>
 	 
 			<li><a href="/attacks">Attacks</a></li>
+			<li><a href="/">Action</a></li>  
 			<li><a href="/rules">Rules</a></li>
 		</ul></nav>
 	 

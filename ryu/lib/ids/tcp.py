@@ -16,9 +16,14 @@ class tcp(object):
 	self.tcp_bits = ids_utils.get_packet_tcp_control_bits(self.packet_data)      
 
     def check_packet(self,mode,src_ip, src_port, dst_ip, dst_port,rule_type,pattern,depth,offset,flags,rule_msg): 
+	global good_pkt     
+	good_pkt = 'True'   
+	#print "In tcp.py"  
+        alertmsg = 'NONE' 
+
         for p in self.packet_data:
             if hasattr(p, 'protocol_name') is True:
-                #print p.protocol_name
+                #print p.protocol_name #--sow
                 if p.protocol_name == 'tcp':
                      match = self.check_tcp_ip_port_match(src_ip, src_port, dst_ip, dst_port,flags)
                      match_content = True
@@ -28,11 +33,11 @@ class tcp(object):
 			 #print 'Length= ', length
                          for p in self.packet_data.protocols:
                              if hasattr(p, 'protocol_name') is False:
-                                 #print 'Value of P in tcp.py ', p
+                                 #print 'Value of P in tcp.py ', p #--sow
                                  #ids_utils.print_packet_data(p, length)
                                  contents=ids_utils.get_packet_data(p,length)
                                  pkt_contents = str(contents)
-                                 #print 'pkt_contents ', pkt_contents
+                                 #print 'pkt_contents in tcp.py', pkt_contents #--sow
                                  #print pattern
 				 if offset is not None:
                                     pkt_contents = pkt_contents[offset:]
@@ -43,10 +48,24 @@ class tcp(object):
                                  #match_content = BoyerMooreStringSearch.BMSearch(pkt_contents,pattern)
                                  	match_content = pkt_contents.find(p)
 					if match_content == -1:
+					   good_pkt='True' #--sow
+					   # Writing good pkt val every time to file
+	                                   f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+          	                           f.write("\n")
+                    	                   f.write(good_pkt)
+                              	           f.close()
                                            break
                              #if match_content == True:
                              if match_content != -1:
-                                 f = open('/home/ubuntu/RYU295/ryu/lib/ids/log.txt', 'a')
+				 good_pkt = 'False' #--sow
+   				 #print "In tcp.py match content!=-1,good_pkt=", good_pkt #--sow
+				 # Writing good pkt val every time to file
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+                                 f.write("\n")
+                                 f.write(good_pkt)
+                                 f.close()
+				 #writing the rule to file
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/log.txt', 'a')
                                  f.write("\n")
                                  f.write(rule_msg)
                                  f.close()
@@ -54,12 +73,13 @@ class tcp(object):
                                                 self.src_ip, self.dst_ip, self.src_port, self.dst_port)
                                  #print 'After Call to Print Packet Data in TCP'
                              #if mode == 'alert' and match_content == True:
+
                              if mode == 'alert' and match_content != -1:
                                  #print 'TCP Attack Packet'
                                  alertmsg = rule_msg
-                                 return alertmsg
-     
-     
+                                 #return alertmsg --sow	
+			    	 return alertmsg #--sow
+       	#return good_pkt,alertmsg #--sow
                                 
     def check_tcp_ip_port_match(self,src_ip, src_port, dst_ip, dst_port,flags):
 

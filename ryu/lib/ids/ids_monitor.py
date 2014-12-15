@@ -50,7 +50,7 @@ class IDSMonitor(app_manager.RyuApp):
                 var_sr_ip = rule_contents[2]
                 var_dst_ip = rule_contents[4]
                 if var_sr_ip == "$HOME_NET":
-                    fname = '/home/ubuntu/RYU295/ryu/lib/ids/conf.txt'
+                    fname = '/home/rashmi/RYU295/ryu/lib/ids/conf.txt'
                     with open(fname) as f:
                        conf_file = f.readlines()
                        for conf_var in conf_file:
@@ -65,7 +65,7 @@ class IDSMonitor(app_manager.RyuApp):
                 sr_port = rule_contents[3]
 
                 if var_dst_ip == "$HOME_NET":
-                    fname = '/home/ubuntu/RYU295/ryu/lib/ids/conf.txt'
+                    fname = '/home/rashmi/RYU295/ryu/lib/ids/conf.txt'
                     with open(fname) as f:
                        conf_file = f.readlines()
                        for conf_var in conf_file:
@@ -159,7 +159,7 @@ class IDSMonitor(app_manager.RyuApp):
 
     def read_rules(self):
         print 'Reading SNORT RULES file'
-        fname = '/home/ubuntu/RYU295/ryu/lib/ids/rules.txt'
+        fname = '/home/rashmi/RYU295/ryu/lib/ids/rules.txt'
         with open(fname) as f:
             self.rules = f.readlines()
             

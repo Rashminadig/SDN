@@ -18,6 +18,7 @@
 			<li ><a href="/packets">Traffic</a></li>
 	 
 			<li><a href="/attacks">Attacks</a></li>
+                        <li><a href="/action">Action</a></li>
 			<li class="active"><a href="/rules">Rules</a></li>
 		</ul></nav>
 	 

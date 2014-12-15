@@ -15,6 +15,10 @@ class udp(object):
         self.length_data = ids_utils.get_packet_length(self.packet_data)      
 
     def check_packet(self,mode,src_ip, src_port, dst_ip, dst_port,rule_type,pattern,depth,offset,flags,rule_msg): 
+	global good_pkt  
+	good_pkt = 'True'   
+	#print "In udp.py "
+        alertmsg = 'NONE' 
         for p in self.packet_data:
             if hasattr(p, 'protocol_name') is True:
                 #print p.protocol_name
@@ -27,7 +31,7 @@ class udp(object):
 			 #print 'Length= ', length
                          for p in self.packet_data.protocols:
                              if hasattr(p, 'protocol_name') is False:
-                                 #print 'Value of P in tcp.py ', p
+                                 print 'Value of P in udp.py ', p
                                  #ids_utils.print_packet_data(p, length)
                                  contents=ids_utils.get_packet_data(p,length)
                                  pkt_contents = str(contents)
@@ -45,12 +49,26 @@ class udp(object):
                                  	match_content =  pkt_contents.find(p)
 					#print 'Pattern in UDP:',p
 					if match_content == -1:
+					   good_pkt= 'True' #--sow
+	 	                           # Writing good pkt val every time to file
+                                 	   f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+                                 	   f.write("\n")
+                                 	   f.write(good_pkt)
+                                 	   f.close()
 					   break
 			     else:
 				  match_content = 1	
                              #if match_content == True:
                              if match_content != -1:
-                                 f = open('/home/ubuntu/RYU295/ryu/lib/ids/log.txt', 'a')
+				 good_pkt = 'False' #--sow
+   				 
+				 # Writing good pkt val every time to file
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/pkt_value.txt', 'a')
+                                 f.write("\n")
+                                 f.write(good_pkt)
+                                 f.close()
+
+                                 f = open('/home/rashmi/RYU295/ryu/lib/ids/log.txt', 'a')
                                  f.write("\n")
                                  f.write(rule_msg)
                                  f.close()
@@ -58,11 +76,16 @@ class udp(object):
                                                 self.src_ip, self.dst_ip, self.src_port, self.dst_port)
                                  #print 'After Call to Print Packet Data in TCP'
                              #if mode == 'alert' and match_content == True:
+			     
                              if mode == 'alert' and match_content != -1:
                                  #print 'UDP Attack Packet'
                                  alertmsg = rule_msg
-                                 return alertmsg
-     
+                                 #return alertmsg --sow	
+				 #good_pkt= 'False' #--sow
+   				 #print "In udp.py mode=alert, match content!=-1, bfr returngood_pkt=", good_pkt #--sow	
+			     	 return alertmsg #--sow
+        #print "out of udp check packet function"
+  	
      
                                 
     def check_udp_ip_port_match(self,src_ip, src_port, dst_ip, dst_port):
