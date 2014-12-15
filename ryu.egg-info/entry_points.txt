@@ -1,0 +1,5 @@
+[console_scripts]
+ryu-manager = ryu.cmd.manager:main
+neutron-ofswitch-agent = ryu.cmd.ofs_neutron_agent:main
+rpc-cli = ryu.cmd.rpc_cli:main
+

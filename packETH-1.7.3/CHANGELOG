@@ -1,0 +1,4 @@
+- when selecting change source ip adress while sending inside Gen-b window, now also tcp and udp checksum are correctly recalculated
+- some other bugs removed
+- some code optimization
+- some changes inside cli version

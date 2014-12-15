@@ -1,0 +1,8 @@
+if __name__ == "__main__":
+    block = "('qazwsx.hsq WHATISIT host Remote|3A| USER NetSphere GateCrasher c|3A5C| FTPON GET activate Wtzup-Use FC wiki backdoor\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',)"
+    #block ="echo(data=NetSphere,id=26399,seq=0)"
+    #print "This is an example search on the string \"", block, "\"."
+    print "abcd", block.find("abcd")
+    #print "example :", BMSearch(block, "example")
+    #print "simple :", BMSearch(block, "simple")
+    #print " imple :", BMSearch(block, " imple")

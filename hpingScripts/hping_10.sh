@@ -1,0 +1,1 @@
+hping3 -c 25 -p 7599 -S 10.0.0.2 -e "2|Drives|24| /source.jsp qazwsx.hsq 0534CF61 GetInfo|0D| Content-Type|3A| BN|10 00 02 00| |05 00| <STREAMQUOTE> WHATISIT |00 02| bin|00|bin|00| MDTM testTCPcontent /plugins/hpjdwm/script/test/setinfo.hts"

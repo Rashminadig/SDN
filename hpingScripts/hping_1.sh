@@ -1,0 +1,1 @@
+hping3 -c 25 -1 10.0.0.2 -C 0 -e "AAAAAAAAAA mailto|3A|ops@digisle.com icmptestcontent niggahbitch SolarWinds.Net ABCDEFGHIJKLMNOPQRSTUVWABCDEFGHI 0123456789abcdefghijklmnopqrstuv sicken DestUnreach 1234"

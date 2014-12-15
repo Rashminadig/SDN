@@ -1,0 +1,27 @@
+DROP TABLE attacks;
+DROP TABLE packets;
+
+CREATE TABLE attacks (
+id MEDIUMINT NOT NULL AUTO_INCREMENT,
+name VARCHAR(20), 
+protocol VARCHAR(20), 
+message VARCHAR(100), 
+sourceip VARCHAR (20), 
+destip VARCHAR(20), 
+sourceport VARCHAR(6), 
+destport VARCHAR(6),
+time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (id));
+
+CREATE TABLE packets (
+id MEDIUMINT NOT NULL AUTO_INCREMENT, 
+protocol VARCHAR(20), 
+sourcemac VARCHAR (20), 
+destmac VARCHAR(20), 
+sourceip VARCHAR (20), 
+destip VARCHAR(20), 
+sourceport VARCHAR(6), 
+destport VARCHAR(6),
+options VARCHAR(50),
+time_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (id));
