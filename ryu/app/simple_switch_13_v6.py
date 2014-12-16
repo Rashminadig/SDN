@@ -390,11 +390,11 @@ class SimpleSwitch13(app_manager.RyuApp):
  		  match = parser.OFPMatch(in_port=in_port, eth_dst=dst, eth_type=0x0800, ipv4_src = src_ip, ipv4_dst=dst_ip ) 
 	          actions = [parser.OFPActionOutput(ofproto.OFPC_FRAG_DROP)] 
                   
-                  m = str(match)
+                  '''m = str(match)
                   f = open('/home/rashmi/RYU295/ryu/lib/switch_flows.txt', 'a')
 	          f.write("\n")
 	          f.write(m)
-	          f.close()       		  
+	          f.close() '''       		  
 
                   self.flow_consistency_check(datapath,match,actions,out_port,host_name)  
 		  
@@ -402,11 +402,11 @@ class SimpleSwitch13(app_manager.RyuApp):
 
  		  match = parser.OFPMatch(in_port=in_port, eth_dst=dst, eth_type=0x0800, ipv4_src = src_ip, ipv4_dst=dst_ip ) 
                   
-                  m = str(match)
+                  '''m = str(match)
                   f = open('/home/rashmi/RYU295/ryu/lib/switch_flows.txt', 'a') 
 	          f.write("\n")
 	          f.write(m)
-	          f.close()   
+	          f.close()   '''
 
 	          if(allow_host[int(host_name)] == True):
 	            actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER)]
